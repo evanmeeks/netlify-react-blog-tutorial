@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Butter from 'buttercms';
 
 const butter = Butter('f1cab14794d33eadb2cde1165c2651e8872f2942');
-const butter = Butter('de55d3f93789d4c5c26fb07445b680e8bca843bd');
+// const butter = Butter('de55d3f93789d4c5c26fb07445b680e8bca843bd');
 
 class BlogHome extends Component {
 	constructor(props) {

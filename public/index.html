@@ -1,31 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/style.css" media="screen" />
+		<link rel="pingback" href="http://hdremixstats.com/evan-meeks/xmlrpc.php" />
+		<link rel="dns-prefetch" href="//s.w.org" />
+		<link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet" />
+		<link rel="alternate" type="application/rss+xml" title="Evan Meeks » Feed" href="http://hdremixstats.com/evan-meeks/feed/" />
+		<link rel="alternate" type="application/rss+xml" title="Evan Meeks » Comments Feed" href="http://hdremixstats.com/evan-meeks/comments/feed/" />
+		<link rel="alternate" type="application/rss+xml" title="Evan Meeks » Portfolio Feed" href="http://hdremixstats.com/evan-meeks/portfolio-items/feed/" />
+		<link
+			rel="stylesheet"
+			id="crayon-css"
+			href="http://hdremixstats.com/evan-meeks/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta"
+			type="text/css"
+			media="all"
+		/>
+		<link
+			rel="stylesheet"
+			id="crayon-theme-classic-css"
+			href="http://hdremixstats.com/evan-meeks/wp-content/plugins/crayon-syntax-highlighter/themes/classic/classic.css?ver=_2.7.2_beta"
+			type="text/css"
+			media="all"
+		/>
+		<link
+			rel="stylesheet"
+			id="crayon-font-monaco-css"
+			href="http://hdremixstats.com/evan-meeks/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta"
+			type="text/css"
+			media="all"
+		/>
+		<link rel="stylesheet" id="woo-layout-css" href="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/css/layout.css?ver=4.7.11" type="text/css" media="all" />
+		<link
+			rel="stylesheet"
+			id="prettyPhoto-css"
+			href="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/css/prettyPhoto.css?ver=4.7.11"
+			type="text/css"
+			media="all"
+		/>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			var CrayonSyntaxSettings = {
+				version: '_2.7.2_beta',
+				is_admin: '0',
+				ajaxurl: 'http:\/\/hdremixstats.com\/evan-meeks\/wp-admin\/admin-ajax.php',
+				prefix: 'crayon-',
+				setting: 'crayon-setting',
+				selected: 'crayon-setting-selected',
+				changed: 'crayon-setting-changed',
+				special: 'crayon-setting-special',
+				orig_value: 'data-orig-value',
+				debug: ''
+			};
+			var CrayonSyntaxStrings = { copy: 'Press %s to Copy, %s to Paste', minimize: 'Click To Expand Code' };
+			/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/js/third-party.js?ver=4.7.11"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/js/general.js?ver=4.7.11"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/js/jquery.prettyPhoto.js?ver=4.7.11"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/js/portfolio.js?ver=4.7.11"></script>
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/themes/pixelpress/includes/js/uniform.js?ver=4.7.11"></script>
+		<link rel="https://api.w.org/" href="http://hdremixstats.com/evan-meeks/wp-json/" />
+		<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://hdremixstats.com/evan-meeks/xmlrpc.php?rsd" />
+		<meta name="generator" content="WordPress 4.7.11" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+		<link rel="stylesheet" href="http://hdremixstats.com/evan-meeks/wp-content/plugins/wp-synhighlight/themes/default/wp-synhighlighter.css" type="text/css" media="screen" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+		<script type="text/javascript" src="http://hdremixstats.com/evan-meeks/wp-content/plugins/wp-synhighlight/themes/default/wp-synhighlighter.js"></script>
 
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
-  </body>
+		<!--
+			Notice the use of %PUBLIC_URL% in the tag above.
+			It will be replaced with the URL of the `public` folder during the build.
+			Only files inside the `public` folder can be referenced from the HTML.
+
+			Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+			work correctly both with client-side routing and a non-root public URL.
+			Learn how to configure a non-root public URL by running `npm run build`.
+		-->
+		<title>React App</title>
+	</head>
+	<body>
+		<div id="root"></div>
+		<!--
+			This HTML file is a template.
+			If you open it directly in the browser, you will see an empty page.
+
+			You can add webfonts, meta tags, or analytics to this file.
+			The build step will place the bundled scripts into the <body> tag.
+
+			To begin the development, run `npm start`.
+			To create a production bundle, use `npm run build`.
+		-->
+	</body>
 </html>
