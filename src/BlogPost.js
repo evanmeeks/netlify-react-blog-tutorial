@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Butter from 'buttercms';
+import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 
 const butter = Butter('f1cab14794d33eadb2cde1165c2651e8872f2942');
@@ -11,6 +12,12 @@ class BlogPost extends Component {
 		this.state = {
 			loaded: false
 		};
+	}
+
+	componentDidMount() {
+		ReactGA.initialize('UA-130580903-1'); //Unique Google Analytics tracking number
+		console.log('rcg');
+		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
 
 	componentWillMount() {
