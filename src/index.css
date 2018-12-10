@@ -3,7 +3,7 @@
 box-sizing: border-box;
 background: white;
 color: rgb(36, 41, 46);
-height: 2740.75px;
+/* height: 2740.75px; */
 overflow-wrap: break-word;
 text-decoration: none solid rgb(36, 41, 46);
 text-size-adjust: 100%;
@@ -50,7 +50,7 @@ outline: rgb(36, 41, 46) none 0px;
 #ARTICLE_2 {
 box-sizing: border-box;
 color: rgb(36, 41, 46);
-height: 2659.75px;
+/* height: 2659.75px; */
 overflow-wrap: break-word;
 text-decoration: none solid rgb(36, 41, 46);
 text-size-adjust: 100%;
