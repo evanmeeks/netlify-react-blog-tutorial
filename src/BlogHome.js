@@ -14,7 +14,7 @@ class BlogHome extends Component {
 	}
 
 	fetchPosts(page) {
-		butter.post.list({ page: page, page_size: 10, category_slug: 'portfolioblog' }).then((resp) => {
+		butter.post.list({ page: page, page_size: 10, category_slug: 'mainblog' }).then((resp) => {
 			this.setState({
 				loaded: true,
 				resp: resp.data
