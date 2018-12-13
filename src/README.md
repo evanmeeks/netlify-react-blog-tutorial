@@ -20,7 +20,7 @@ Currently:
 
 -   [x] Implement redux-immutable-state-invariant - Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
 -   [x] UI Reducer
--   [x] Lifting state management to Redux / Redux Saga
+-   [x] Blogs Reducer
 -   [ ] Refactor existing stateful class container code to functional stateless components
 
 Next:
