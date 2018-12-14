@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import Butter from 'buttercms';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
@@ -57,15 +58,20 @@ class BlogPost extends Component {
 
 			const { classes } = this.props;
 
-			console.log('tags', this.state.post);
 			return (
 				<>
 					<Helmet>
 						<title>{post.seo_title}</title>
 						<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' />
 					</Helmet>
+
 					<Paper className={classes.root} style={{ fontFamily: "'Lato', sans-serif" }} elevation={1}>
+						<Link className={classes.link} to='/'>
+							{' '}
+							Home
+						</Link>
 						<h1 style={{ fontFamily: "'Lato', sans-serif" }}>{post.seo_title}</h1>
+
 						<Typography component='p' style={{ fontFamily: "'Lato', sans-serif", margin: '20px', display: 'flex' }}>
 							{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
 							{tags &&
@@ -98,6 +104,10 @@ const styles = (theme) => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2
+	},
+	link: {
+		textDecoration: 'none',
+		color: '#4d5ebd'
 	}
 });
 
