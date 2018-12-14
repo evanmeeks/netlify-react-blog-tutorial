@@ -25,7 +25,7 @@ class BlogHome extends Component {
 	}
 
 	fetchPosts(page) {
-		butter.post.list({ page: page, page_size: 10, category_slug: 'mainblog' }).then((resp) => {
+		butter.post.list({ page: page, page_size: 40, category_slug: 'mainblog' }).then((resp) => {
 			this.setState({
 				loaded: true,
 				resp: resp.data
@@ -83,6 +83,11 @@ class BlogHome extends Component {
 							);
 						})}
 					</Paper>
+					<div>
+						{previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
+
+						{next_page && <Link to={`/p/${next_page}`}>Next</Link>}
+					</div>
 				</>
 			);
 		} else {
