@@ -10,6 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import OutlinedChips from './OutlinedChips';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -70,24 +71,27 @@ class BlogHome extends Component {
 													</p>
 												</CardContent>
 											</CardActionArea>
-											<CardActions>
+											<div className='tagCloud'>
+												{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
+												{post.tags &&
+													post.tags.map((tag) => {
+														const { name, slug } = tag;
+														return <OutlinedChips href='' label={name} key={slug} />;
+													})}
+											</div>
+											{/* <CardActions>
 												<Button size='small' color='primary'>
 													<Link className={classes.link} to={`/post/${post.slug}`}>
 														{post.title}
 													</Link>
 												</Button>
-											</CardActions>
+											</CardActions> */}
 										</Card>
 									</Link>
 								</div>
 							);
 						})}
 					</Paper>
-					<div>
-						{previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
-
-						{next_page && <Link to={`/p/${next_page}`}>Next</Link>}
-					</div>
 				</>
 			);
 		} else {
@@ -146,6 +150,10 @@ const styles = (theme) => ({
 		flex: '1 2 calc(31% - 3px)',
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2
+	},
+	chipRoot: {
+		display: 'flex',
+		flexWrap: 'wrap'
 	}
 });
 

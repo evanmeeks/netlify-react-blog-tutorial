@@ -72,18 +72,14 @@ class BlogPost extends Component {
 						</Link>
 						<h1 style={{ fontFamily: "'Lato', sans-serif" }}>{post.seo_title}</h1>
 
-						<Typography component='p' style={{ fontFamily: "'Lato', sans-serif", margin: '20px', display: 'flex' }}>
+						<div className='tagCloud'>
 							{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
 							{tags &&
 								tags.map((tag) => {
 									const { name, slug } = tag;
-									return (
-										<section>
-											<Chip className='Tags' href='' label={name} key={slug} />
-										</section>
-									);
+									return <Chip href='' label={name} key={slug} />;
 								})}
-						</Typography>
+						</div>
 
 						<article dangerouslySetInnerHTML={{ __html: post.body }} />
 					</Paper>
@@ -104,6 +100,10 @@ const styles = (theme) => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2
+	},
+	chipRoot: {
+		...theme.mixins.gutters(),
+		margin: theme.spacing.unit
 	},
 	link: {
 		textDecoration: 'none',

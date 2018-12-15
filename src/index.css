@@ -1,6 +1,26 @@
 body {
      font-family: 'Lato', sans-serif
 }
+.tagCloud {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 11px;
+}
+span.MuiChip-label-123 {
+    font-size: 0.83rem;
+}
+
+.tagElement {
+   flex: 0 1 calc(5% -4px);
+}
+.outlinedChip {
+    font-size: 0.9rem;
+    margin-left: 9px;
+    margin-right: 1px;
+    margin-top: 6px;
+    text-transform: capitalize;
+    margin-bottom: 7px;
+}
 .MuiTypography-h5-109 {
     color: rgba(0, 0, 0, 0.87);
     font-size: 1.5rem;
