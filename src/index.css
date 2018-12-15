@@ -6,6 +6,11 @@ body {
     flex-wrap: wrap;
     margin: 11px;
 }
+.tagCloudPost{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -9px;
+}
 span.MuiChip-label-123 {
     font-size: 0.83rem;
 }

@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import OutlinedChips from './OutlinedChips';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -72,12 +73,12 @@ class BlogPost extends Component {
 						</Link>
 						<h1 style={{ fontFamily: "'Lato', sans-serif" }}>{post.seo_title}</h1>
 
-						<div className='tagCloud'>
+						<div className='tagCloudPost'>
 							{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
 							{tags &&
 								tags.map((tag) => {
 									const { name, slug } = tag;
-									return <Chip href='' label={name} key={slug} />;
+									return <OutlinedChips className='postChip' href='' label={name} key={slug} />;
 								})}
 						</div>
 
