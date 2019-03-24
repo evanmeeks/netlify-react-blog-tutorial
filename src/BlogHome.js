@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Butter from 'buttercms';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import OutlinedChips from './OutlinedChips';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import { Link } from "react-router";
+import Butter from "buttercms";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Avatar from "@material-ui/core/Avatar";
+import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import OutlinedChips from "./OutlinedChips";
+import { Helmet } from "react-helmet";
 
-const butter = Butter('f1cab14794d33eadb2cde1165c2651e8872f2942');
+const butter = Butter("f1cab14794d33eadb2cde1165c2651e8872f2942");
 
 class BlogHome extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			tagCloud: [],
 			loaded: false
 		};
 	}
 
 	fetchPosts(page) {
-		butter.post.list({ page: page, page_size: 40, category_slug: 'mainblog' }).then((resp) => {
+		butter.post.list({ page: page, page_size: 40, category_slug: "mainblog" }).then((resp) => {
 			this.setState({
 				loaded: true,
 				resp: resp.data
@@ -34,60 +34,120 @@ class BlogHome extends Component {
 		});
 	}
 
-	componentWillMount() {
-		let page = this.props.params.page || 1;
-
-		this.fetchPosts(page);
+	fetchTagPosts(tag) {
+		butter.post.list({ tag_slug: tag, page_size: 40, category_slug: "mainblog" }).then((resp) => {
+			this.setState({
+				loaded: true,
+				resp: resp.data
+			});
+		});
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({ loaded: false });
-
 		let page = nextProps.params.page || 1;
-
+		this.setState({ loaded: false });
 		this.fetchPosts(page);
 	}
+
+	componentWillMount() {
+		let page = this.props.params.page || 1;
+		this.fetchPosts(page);
+	}
+
+	handleDelete = (tag) => () => {
+		const { slug } = tag;
+		let tagCloud = this.state.tagCloud;
+		const tagToDelete = tagCloud.map(({ slug }) => slug).indexOf(slug);
+
+		tagCloud.splice(tagToDelete, 1);
+		this.setState({
+			tagCloud
+		});
+
+		if (!tagCloud.length) {
+			let page = this.props.params.page || 1;
+			this.fetchPosts(page);
+		}
+	};
+
+	handleClick = (tag) => {
+		const { slug } = tag;
+		let tagCloud = this.state.tagCloud;
+		this.fetchTagPosts(slug);
+		if (tagCloud.map(({ slug }) => slug).indexOf(slug) === -1) {
+			tagCloud = [tag, ...this.state.tagCloud];
+			this.setState({
+				tagCloud
+			});
+		}
+	};
 
 	render() {
 		if (this.state.loaded) {
 			const { next_page, previous_page } = this.state.resp.meta;
 			const { classes } = this.props;
-			console.log('this.state.resp', this.state.resp);
+
 			return (
 				<>
-					<h2 style={{ fontFamily: "'Lato', sans-serif", color: '#4d5ebd' }}>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
+					<Helmet>
+						<title>Evan Meeks Blog and Portfolio</title>
+						<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+					</Helmet>
+
+					<h2 style={{ fontFamily: "'Lato', sans-serif", color: "#4d5ebd" }}>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
+					<h2 style={{ fontFamily: "'Lato', sans-serif", color: "#4d5ebd" }}>
+						{this.state.tagCloud.length ? (
+							<Paper className={classes.chipRoot}>
+								{this.state.tagCloud.map(({ slug, name }, key) => {
+									let avatar = null;
+
+									if (slug === "functional-programming") {
+										avatar = <Avatar>FP</Avatar>;
+									}
+
+									return (
+										<Chip
+											label={name}
+											onClick={() => this.fetchTagPosts(slug)}
+											avatar={avatar}
+											label={name}
+											onDelete={this.handleDelete({ slug, name })}
+											className={classes.chip}
+											key={key + slug}
+										/>
+									);
+								})}
+							</Paper>
+						) : null}
+					</h2>
 					<Paper className={classes.root} elevation={0}>
-						{this.state.resp.data.map((post) => {
+						{this.state.resp.data.map((post, key) => {
 							return (
-								<div className={classes.cardContainer} button key={post.slug}>
-									<Link className={classes.link} to={`/post/${post.slug}`}>
-										<Card className={classes.card}>
+								<div className={classes.cardContainer} key={post.slug + key}>
+									<Card className={classes.card}>
+										<Link className={classes.link} to={`/post/${post.slug}`}>
 											<CardActionArea>
-												<CardMedia className={classes.media} image={post.featured_image} title='Contemplative Reptile' />
+												<CardMedia className={classes.media} image={post.featured_image} title="Contemplative Reptile" />
 												<CardContent>
 													<h2 className={classes.header}>{post.seo_title}</h2>
-													<p className={classes.p} component='p'>
+													<p className={classes.p} component="p">
 														{post.summary}
 													</p>
 												</CardContent>
 											</CardActionArea>
-											<div className='tagCloud'>
-												{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
-												{post.tags &&
-													post.tags.map((tag) => {
-														const { name, slug } = tag;
-														return <OutlinedChips href='' label={name} key={slug} />;
-													})}
-											</div>
-											{/* <CardActions>
-												<Button size='small' color='primary'>
-													<Link className={classes.link} to={`/post/${post.slug}`}>
-														{post.title}
-													</Link>
-												</Button>
-											</CardActions> */}
-										</Card>
-									</Link>
+										</Link>
+										<div className="tagCloud">
+											{post.tags &&
+												post.tags.map((tag, key) => {
+													const { name, slug } = tag;
+													return (
+														<div onClick={() => this.handleClick(tag)} key={key + slug}>
+															<OutlinedChips label={name} />
+														</div>
+													);
+												})}
+										</div>
+									</Card>
 								</div>
 							);
 						})}
@@ -108,52 +168,60 @@ const styles = (theme) => ({
 	card: {
 		maxWidth: 345,
 		fontFamily: "'Lato', sans-serif",
-		margin: '0 0 0 14px',
-		textDecoration: 'none',
-		cursor: 'pointer'
+		margin: "0 0 0 14px",
+		textDecoration: "none",
+		cursor: "pointer"
 	},
 	link: {
 		maxWidth: 345,
-		color: '#4d5ebd',
-		textDecoration: 'none',
-		textAlign: 'left',
+		color: "#4d5ebd",
+		textDecoration: "none",
+		textAlign: "left",
 		fontFamily: "'Lato', sans-serif",
-		marginBottom: '20px',
-		textDecoration: 'none'
+		marginBottom: "20px",
+		textDecoration: "none"
 	},
 	media: {
-		height: '153px',
+		height: "153px",
 		fontFamily: "'Lato', sans-serif",
-		border: '1px solid #5f5dd624',
-		margin: '7px'
+		border: "1px solid #5f5dd624",
+		margin: "7px"
 	},
 	header: {
 		fontFamily: "'Lato', sans-serif",
-		color: '#4d5ebd',
-		fontSize: '1.8em'
+		color: "#4d5ebd",
+		fontSize: "1.8em"
 	},
 	p: {
-		color: '#5482bf',
-		fontSize: '1.25em'
+		color: "#5482bf",
+		fontSize: "1.25em"
 	},
 	cardContainer: {
-		display: 'flex',
-		flex: '1 2 calc(31% - 3px)'
+		display: "flex",
+		flex: "1 2 calc(31% - 3px)"
 	},
 	root: {
 		...theme.mixins.gutters(),
 		fontFamily: "'Lato', sans-serif",
-		background: '#edeef3',
-		maxWidth: '59vw',
-		display: 'flex',
-		flexFlow: 'row wrap',
-		flex: '1 2 calc(31% - 3px)',
+		background: "#edeef3",
+		maxWidth: "59vw",
+		minWidth: "80vw",
+		display: "flex",
+		flexFlow: "row wrap",
+		flex: "1 2 calc(31% - 3px)",
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2
 	},
 	chipRoot: {
-		display: 'flex',
-		flexWrap: 'wrap'
+		display: "flex",
+		justifyContent: "center",
+		fontFamily: "'Lato', sans-serif",
+		fontSize: ".8em",
+		flexWrap: "wrap",
+		padding: theme.spacing.unit / 2
+	},
+	chip: {
+		margin: theme.spacing.unit / 2
 	}
 });
 

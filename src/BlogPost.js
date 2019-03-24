@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Butter from 'buttercms';
-import ReactGA from 'react-ga';
-import { Helmet } from 'react-helmet';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import OutlinedChips from './OutlinedChips';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import { Link } from "react-router";
+import Butter from "buttercms";
+import ReactGA from "react-ga";
+import { Helmet } from "react-helmet";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import OutlinedChips from "./OutlinedChips";
+import Paper from "@material-ui/core/Paper";
 
-import marked from 'marked';
-
-const butter = Butter('f1cab14794d33eadb2cde1165c2651e8872f2942');
+const butter = Butter("f1cab14794d33eadb2cde1165c2651e8872f2942");
 
 class BlogPost extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			loaded: false,
 			tags: []
@@ -25,7 +20,7 @@ class BlogPost extends Component {
 	}
 
 	componentDidMount() {
-		ReactGA.initialize('UA-130580903-1'); //Unique Google Analytics tracking number
+		ReactGA.initialize("UA-130580903-1"); //Unique Google Analytics tracking number
 		ReactGA.pageview(window.location.pathname + window.location.search);
 	}
 
@@ -35,52 +30,28 @@ class BlogPost extends Component {
 		butter.post.retrieve(slug).then((resp) => {
 			this.setState({
 				loaded: true,
-
 				post: resp.data.data
 			});
 		});
-		const readmePath = require('./README.md');
-		fetch(readmePath)
-			.then((response) => {
-				console.log();
-				return response.text();
-			})
-			.then((text) => {
-				this.setState({
-					markdown: marked(text)
-				});
-			});
 	}
 
 	render() {
 		if (this.state.loaded) {
+			const { classes } = this.props;
 			const post = this.state.post;
 			const tags = this.state.post.tags;
-
-			const { classes } = this.props;
 
 			return (
 				<>
 					<Helmet>
-						<title>{post.seo_title}</title>
-						<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' />
+						<title>Evan Meeks Blog and Portfolio - {post.seo_title}</title>
+						<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 					</Helmet>
-
 					<Paper className={classes.root} style={{ fontFamily: "'Lato', sans-serif" }} elevation={1}>
-						<Link className={classes.link} to='/'>
-							{' '}
+						<Link className={classes.link} to="/">
 							Home
 						</Link>
 						<h1 style={{ fontFamily: "'Lato', sans-serif" }}>{post.seo_title}</h1>
-
-						<div className='tagCloudPost'>
-							{/* <article dangerouslySetInnerHTML={{ __html: this.state.markdown }} /> */}
-							{tags &&
-								tags.map((tag) => {
-									const { name, slug } = tag;
-									return <OutlinedChips className='postChip' href='' label={name} key={slug} />;
-								})}
-						</div>
 
 						<article dangerouslySetInnerHTML={{ __html: post.body }} />
 					</Paper>
@@ -107,8 +78,8 @@ const styles = (theme) => ({
 		margin: theme.spacing.unit
 	},
 	link: {
-		textDecoration: 'none',
-		color: '#4d5ebd'
+		textDecoration: "none",
+		color: "#4d5ebd"
 	}
 });
 

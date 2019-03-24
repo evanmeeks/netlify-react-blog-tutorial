@@ -23,6 +23,7 @@ span.MuiChip-label-123 {
     margin-left: 9px;
     margin-right: 1px;
     margin-top: 6px;
+    cursor:pointer;
     text-transform: capitalize;
     margin-bottom: 7px;
 }
