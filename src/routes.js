@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Redirect, IndexRoute, Route } from "react-router";
+import { Router, IndexRoute, Route } from "react-router";
 
 import App from "./App";
 import BlogHome from "./BlogHome";
@@ -11,7 +11,6 @@ const Routes = (props) => (
 			<IndexRoute component={BlogHome} />
 			<Route path="/p/:page" component={BlogHome} />
 			<Route path="/post/:slug" component={BlogPost} />
-			<Route path="/post/tag/:slug" exact component={BlogPost} />
 		</Route>
 	</Router>
 );

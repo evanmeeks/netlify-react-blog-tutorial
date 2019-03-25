@@ -12,7 +12,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import OutlinedChips from "./OutlinedChips";
 import { Helmet } from "react-helmet";
-
 const butter = Butter("f1cab14794d33eadb2cde1165c2651e8872f2942");
 
 class BlogHome extends Component {
@@ -84,9 +83,8 @@ class BlogHome extends Component {
 
 	render() {
 		if (this.state.loaded) {
-			const { next_page, previous_page } = this.state.resp.meta;
 			const { classes } = this.props;
-
+			console.log("this.state.resp", this.state.resp);
 			return (
 				<>
 					<Helmet>
@@ -94,8 +92,9 @@ class BlogHome extends Component {
 						<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 					</Helmet>
 
-					<h2 style={{ fontFamily: "'Lato', sans-serif", color: "#4d5ebd" }}>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
-					<h2 style={{ fontFamily: "'Lato', sans-serif", color: "#4d5ebd" }}>
+					<h2>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
+
+					<h2>
 						{this.state.tagCloud.length ? (
 							<Paper className={classes.chipRoot}>
 								{this.state.tagCloud.map(({ slug, name }, key) => {
@@ -110,7 +109,6 @@ class BlogHome extends Component {
 											label={name}
 											onClick={() => this.fetchTagPosts(slug)}
 											avatar={avatar}
-											label={name}
 											onDelete={this.handleDelete({ slug, name })}
 											className={classes.chip}
 											key={key + slug}
@@ -121,9 +119,9 @@ class BlogHome extends Component {
 						) : null}
 					</h2>
 					<Paper className={classes.root} elevation={0}>
-						{this.state.resp.data.map((post, key) => {
+						{this.state.resp.data.map((post) => {
 							return (
-								<div className={classes.cardContainer} key={post.slug + key}>
+								<div className={classes.cardContainer} button key={post.slug}>
 									<Card className={classes.card}>
 										<Link className={classes.link} to={`/post/${post.slug}`}>
 											<CardActionArea>
@@ -136,6 +134,7 @@ class BlogHome extends Component {
 												</CardContent>
 											</CardActionArea>
 										</Link>
+
 										<div className="tagCloud">
 											{post.tags &&
 												post.tags.map((tag, key) => {
@@ -178,8 +177,7 @@ const styles = (theme) => ({
 		textDecoration: "none",
 		textAlign: "left",
 		fontFamily: "'Lato', sans-serif",
-		marginBottom: "20px",
-		textDecoration: "none"
+		marginBottom: "20px"
 	},
 	media: {
 		height: "153px",
@@ -197,8 +195,13 @@ const styles = (theme) => ({
 		fontSize: "1.25em"
 	},
 	cardContainer: {
-		display: "flex",
-		flex: "1 2 calc(31% - 3px)"
+		flex: "1 2 calc(31% - 3px)",
+		color: "#4d5ebd",
+		cursor: "pointer",
+		display: "inline",
+		marginBottom: "20px",
+		mminWidth: "345px",
+		width: "auto"
 	},
 	root: {
 		...theme.mixins.gutters(),
@@ -214,14 +217,8 @@ const styles = (theme) => ({
 	},
 	chipRoot: {
 		display: "flex",
-		justifyContent: "center",
-		fontFamily: "'Lato', sans-serif",
-		fontSize: ".8em",
 		flexWrap: "wrap",
-		padding: theme.spacing.unit / 2
-	},
-	chip: {
-		margin: theme.spacing.unit / 2
+		padding: "20px"
 	}
 });
 

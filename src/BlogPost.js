@@ -5,7 +5,6 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import OutlinedChips from "./OutlinedChips";
 import Paper from "@material-ui/core/Paper";
 
 const butter = Butter("f1cab14794d33eadb2cde1165c2651e8872f2942");
@@ -38,8 +37,7 @@ class BlogPost extends Component {
 	render() {
 		if (this.state.loaded) {
 			const { classes } = this.props;
-			const post = this.state.post;
-			const tags = this.state.post.tags;
+			const { post } = this.state;
 
 			return (
 				<>

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
-import FaceIcon from "@material-ui/icons/Face";
 import DoneIcon from "@material-ui/icons/Done";
 
 const styles = (theme) => ({
@@ -30,7 +29,7 @@ function fpChip(props) {
 }
 
 function OutlinedChips(props) {
-	const { classes, slug, label } = props;
+	const { classes, label } = props;
 
 	return (
 		<div className={classes.root}>
