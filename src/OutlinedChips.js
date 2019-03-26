@@ -19,25 +19,27 @@ const styles = (theme) => ({
 		cursor: "pointer",
 		textTransform: "capitalize",
 		fontSize: "0.7em",
-		margin: "2px"
+		marginleft: "2px",
+		marginRight: "2px",
+		marginBottom: "7px"
 	}
 });
 
 function fpChip(props) {
 	const { classes } = props;
-	return <Chip avatar={<Avatar>FP</Avatar>} deleteIcon={<DoneIcon />} className={classes.outlinedChip} label="Functional Programming" color="primary" variant="outlined" />;
+	return <Chip avatar={<Avatar>FP</Avatar>} className={classes.outlinedChip} label="Functional Programming" color="primary" variant="outlined" />;
 }
 
 function OutlinedChips(props) {
 	const { classes, label } = props;
-
-	return (
-		<div className={classes.root}>
-			{(label === "functional programming" && fpChip(props)) || (
-				<Chip label={label} deleteIcon={<DoneIcon />} color="primary" className={classes.outlinedChip} variant="outlined" />
-			)}
-		</div>
-	);
+	if (label === "functional programming") {
+		return fpChip(props);
+	} else
+		return (
+			<div className={classes.root}>
+				<Chip onDelete={() => {}} deleteIcon={<DoneIcon />} label={label} color="primary" className={classes.outlinedChip} variant="outlined" />
+			</div>
+		);
 }
 
 OutlinedChips.propTypes = {

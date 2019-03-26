@@ -135,7 +135,7 @@ class BlogHome extends Component {
 											</CardActionArea>
 										</Link>
 
-										<div className="tagCloud">
+										<div className={classes.postTags}>
 											{post.tags &&
 												post.tags.map((tag, key) => {
 													const { name, slug } = tag;
@@ -219,6 +219,11 @@ const styles = (theme) => ({
 		display: "flex",
 		flexWrap: "wrap",
 		padding: "20px"
+	},
+	postTags: {
+		display: "flex",
+		flexWrap: "wrap",
+		margin: "11px"
 	}
 });
 
