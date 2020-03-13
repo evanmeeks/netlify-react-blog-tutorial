@@ -162,7 +162,7 @@ class BlogHome extends Component {
 		} else {
 			return (
         <span>
-          <div>lofring...</div>
+          <div>Loading...</div>
           <img style={{ width: "972px", height: "400px" }} src={butterLogo} />
         </span>
       );
