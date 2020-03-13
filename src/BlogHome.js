@@ -155,7 +155,9 @@ class BlogHome extends Component {
                 </div>
               );
             })}
-            <img style={{ width: "200px", height: "400px" }} src={butterLogo} />
+            <a href="https://buttercms.com">
+              <img style={{ width: "972px", height: "400px" }} src={butterLogo} />
+            </a>
           </Paper>
         </>
       );
@@ -163,7 +165,9 @@ class BlogHome extends Component {
 			return (
         <span>
           <div>Loading...</div>
-          <img style={{ width: "972px", height: "400px" }} src={butterLogo} />
+          <a href="https://buttercms.com">
+            <img style={{ width: "972px", height: "400px" }} src={butterLogo} />
+          </a>
         </span>
       );
 			
