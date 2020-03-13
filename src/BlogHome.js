@@ -12,6 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import OutlinedChips from "./OutlinedChips";
 import { Helmet } from "react-helmet";
+import butterLogo from './butter-y.png';
 const butter = Butter("f1cab14794d33eadb2cde1165c2651e8872f2942");
 
 class BlogHome extends Component {
@@ -86,75 +87,86 @@ class BlogHome extends Component {
 			const { classes } = this.props;
 			console.log("this.state.resp", this.state.resp);
 			return (
-				<>
-					<Helmet>
-						<title>Evan Meeks Blog and Portfolio</title>
-						<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-					</Helmet>
+        <>
+          <Helmet>
+            <title>Evan Meeks Blog and Portfolio</title>
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+          </Helmet>
 
-					<h2>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
+          <h2>Evan Meeks Blog and Portfolio - Serverless ButterCMS Content </h2>
 
-					<h2>
-						{this.state.tagCloud.length ? (
-							<Paper className={classes.chipRoot}>
-								{this.state.tagCloud.map(({ slug, name }, key) => {
-									let avatar = null;
+          <h2>
+            {this.state.tagCloud.length ? (
+              <Paper className={classes.chipRoot}>
+                {this.state.tagCloud.map(({ slug, name }, key) => {
+                  let avatar = null;
 
-									if (slug === "functional-programming") {
-										avatar = <Avatar>FP</Avatar>;
-									}
+                  if (slug === "functional-programming") {
+                    avatar = <Avatar>FP</Avatar>;
+                  }
 
-									return (
-										<Chip
-											label={name}
-											onClick={() => this.fetchTagPosts(slug)}
-											avatar={avatar}
-											onDelete={this.handleDelete({ slug, name })}
-											className={classes.chip}
-											key={key + slug}
-										/>
-									);
-								})}
-							</Paper>
-						) : null}
-					</h2>
-					<Paper className={classes.root} elevation={0}>
-						{this.state.resp.data.map((post) => {
-							return (
-								<div className={classes.cardContainer} button key={post.slug}>
-									<Card className={classes.card}>
-										<Link className={classes.link} to={`/post/${post.slug}`}>
-											<CardActionArea>
-												<CardMedia className={classes.media} image={post.featured_image} title="Contemplative Reptile" />
-												<CardContent>
-													<h2 className={classes.header}>{post.seo_title}</h2>
-													<p className={classes.p} component="p">
-														{post.summary}
-													</p>
-												</CardContent>
-											</CardActionArea>
-										</Link>
+                  return (
+                    <Chip
+                      label={name}
+                      onClick={() => this.fetchTagPosts(slug)}
+                      avatar={avatar}
+                      onDelete={this.handleDelete({ slug, name })}
+                      className={classes.chip}
+                      key={key + slug}
+                    />
+                  );
+                })}
+              </Paper>
+            ) : null}
+          </h2>
+          <Paper className={classes.root} elevation={0}>
+            {this.state.resp.data.map(post => {
+              return (
+                <div className={classes.cardContainer} button key={post.slug}>
+                  <Card className={classes.card}>
+                    <Link className={classes.link} to={`/post/${post.slug}`}>
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={post.featured_image}
+                          title="Contemplative Reptile"
+                        />
+                        <CardContent>
+                          <h2 className={classes.header}>{post.seo_title}</h2>
+                          <p className={classes.p} component="p">
+                            {post.summary}
+                          </p>
+                        </CardContent>
+                      </CardActionArea>
+                    </Link>
 
-										<div className={classes.postTags}>
-											{post.tags &&
-												post.tags.map((tag, key) => {
-													const { name, slug } = tag;
-													return (
-														<div onClick={() => this.handleClick(tag)} key={key + slug}>
-															<OutlinedChips label={name} />
-														</div>
-													);
-												})}
-										</div>
-									</Card>
-								</div>
-							);
-						})}
-					</Paper>
-				</>
-			);
+                    <div className={classes.postTags}>
+                      {post.tags &&
+                        post.tags.map((tag, key) => {
+                          const { name, slug } = tag;
+                          return (
+                            <div onClick={() => this.handleClick(tag)} key={key + slug}>
+                              <OutlinedChips label={name} />
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </Card>
+                </div>
+              );
+            })}
+            <img style={{ width: "200px", height: "400px" }} src={butterLogo} />
+          </Paper>
+        </>
+      );
 		} else {
-			return <div>Loading...</div>;
+			return (
+        <span>
+          <div>lofring...</div>
+          <img style={{ width: "972px", height: "400px" }} src={butterLogo} />
+        </span>
+      );
+			
 		}
 	}
 }
